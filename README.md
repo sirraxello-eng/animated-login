@@ -26,7 +26,7 @@ Project fullstack login system dengan tampilan **neon premium UI** dan fitur **a
 
 ## 📸 Preview
 
-![preview](preview.png)
+![preview](assets/preview.png)
 
 ---
 
