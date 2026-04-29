@@ -1,18 +1,24 @@
 const express = require('express');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
 
 // ======================
-// KONEKSI DATABASE (mysql2)
+// SERVE FRONTEND
+// ======================
+app.use(express.static(path.join(__dirname, 'public')));
+
+// ======================
+// DATABASE
 // ======================
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '', // sesuaikan
-  database: 'login_db' // sesuaikan
+  password: '',
+  database: 'login_db'
 });
 
 db.connect((err) => {
@@ -24,17 +30,14 @@ db.connect((err) => {
 });
 
 // ======================
-// GET ALL USERS
+// DEFAULT ROUTE
 // ======================
-app.get('/users', (req, res) => {
-  db.query('SELECT id, name, email FROM users', (err, results) => {
-    if (err) return res.status(500).send(err);
-    res.json(results);
-  });
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ======================
-// ADD USER
+// REGISTER (ADD USER)
 // ======================
 app.post('/users', async (req, res) => {
   try {
@@ -50,13 +53,64 @@ app.post('/users', async (req, res) => {
       'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
       [name, email, hashed],
       (err) => {
-        if (err) return res.status(400).send('Gagal tambah user');
-        res.send('User berhasil ditambahkan');
+        if (err) return res.status(400).send('Gagal register');
+        res.send('Register berhasil');
       }
     );
   } catch (err) {
     res.status(500).send(err);
   }
+});
+
+// ======================
+// LOGIN
+// ======================
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).send('Email & password wajib diisi');
+  }
+
+  db.query(
+    'SELECT * FROM users WHERE email = ?',
+    [email],
+    async (err, results) => {
+      if (err) return res.status(500).send(err);
+
+      if (results.length === 0) {
+        return res.status(404).send('User tidak ditemukan');
+      }
+
+      const user = results[0];
+
+      const match = await bcrypt.compare(password, user.password);
+
+      if (!match) {
+        return res.status(401).send('Password salah');
+      }
+
+      // LOGIN BERHASIL
+      res.json({
+        message: 'Login berhasil',
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        }
+      });
+    }
+  );
+});
+
+// ======================
+// GET USERS
+// ======================
+app.get('/users', (req, res) => {
+  db.query('SELECT id, name, email FROM users', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
 });
 
 // ======================
@@ -92,6 +146,7 @@ app.delete('/users/:id', (req, res) => {
 // ======================
 // RUN SERVER
 // ======================
-app.listen(3000, () => {
-  console.log('Server jalan di http://localhost:3000');
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server jalan di http://localhost:${PORT}`);
 });
