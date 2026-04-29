@@ -1,22 +1,25 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 
 const app = express();
 app.use(express.json());
 
 // ======================
-// KONEKSI DATABASE
+// KONEKSI DATABASE (mysql2)
 // ======================
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
-  database: 'test' // ganti sesuai database kamu
+  password: '', // sesuaikan
+  database: 'test' // sesuaikan
 });
 
 db.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.error('Database error:', err);
+    return;
+  }
   console.log('Database connected');
 });
 
@@ -87,7 +90,7 @@ app.delete('/users/:id', (req, res) => {
 });
 
 // ======================
-// JALANKAN SERVER
+// RUN SERVER
 // ======================
 app.listen(3000, () => {
   console.log('Server jalan di http://localhost:3000');
