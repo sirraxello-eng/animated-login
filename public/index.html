@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Neon</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="box">
+
+  <!-- LOGIN -->
+  <div id="loginForm">
+    <h2>Login</h2>
+
+    <div class="inputBox">
+      <input type="email" id="loginEmail" placeholder="Email">
+    </div>
+
+    <div class="inputBox">
+      <input type="password" id="loginPassword" placeholder="Password">
+    </div>
+
+    <button onclick="login()">Login</button>
+
+    <p class="switch">
+      Belum punya akun?
+      <span onclick="showRegister()">Register</span>
+    </p>
+  </div>
+
+  <!-- REGISTER -->
+  <div id="registerForm" style="display:none;">
+    <h2>Register</h2>
+
+    <div class="inputBox">
+      <input type="text" id="name" placeholder="Nama">
+    </div>
+
+    <div class="inputBox">
+      <input type="email" id="registerEmail" placeholder="Email">
+    </div>
+
+    <div class="inputBox">
+      <input type="password" id="registerPassword" placeholder="Password">
+    </div>
+
+    <button onclick="register()">Daftar</button>
+
+    <p class="switch">
+      Sudah punya akun?
+      <span onclick="showLogin()">Login</span>
+    </p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

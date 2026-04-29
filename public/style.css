@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+}
+
+/* BOX */
+.box {
+  width: 320px;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 0 25px #00f2fe;
+}
+
+/* TITLE */
+h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px #00f2fe;
+}
+
+/* INPUT WRAPPER */
+.inputBox {
+  position: relative;
+  width: 100%;
+  margin: 15px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* INPUT */
+.inputBox input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+/* NEON BORDER */
+.inputBox::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(270deg, #00f2fe, #4facfe, #00f2fe);
+  animation: borderRun 4s linear infinite;
+  z-index: 0;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+/* AKTIF SAAT FOCUS */
+.inputBox:focus-within::before {
+  opacity: 1;
+}
+
+/* INNER BACKGROUND */
+.inputBox::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #0f172a;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* ANIMASI */
+@keyframes borderRun {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00f2fe, #4facfe);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00f2fe;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 10px #00f2fe,
+    0 0 20px #00f2fe,
+    0 0 40px #00f2fe;
+}
+
+/* SWITCH */
+.switch {
+  color: #ccc;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.switch span {
+  color: cyan;
+  cursor: pointer;
+}
