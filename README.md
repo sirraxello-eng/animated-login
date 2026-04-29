@@ -4,6 +4,14 @@ Project fullstack login system dengan tampilan **neon premium UI** dan fitur **a
 
 ---
 
+## 📸 Preview
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sirraxello-eng/animated-login/main/assets/preview.png" width="800"/>
+</p>
+
+---
+
 ## 🔥 Features
 
 * 🔐 Authentication (Login & Register)
@@ -24,20 +32,16 @@ Project fullstack login system dengan tampilan **neon premium UI** dan fitur **a
 
 ---
 
-## 📸 Preview
-
-![preview](assets/preview.png)
-
----
-
 ## ⚙️ Installation & Setup
 
 ### 1. Clone project
 
 ```bash
-git clone https://github.com/username/repo-name.git
-cd repo-name
+git clone https://github.com/sirraxello-eng/animated-login.git
+cd animated-login
 ```
+
+---
 
 ### 2. Install dependencies
 
@@ -95,7 +99,7 @@ const db = mysql.createConnection({
 node server.js
 ```
 
-Server akan jalan di:
+Server akan berjalan di:
 
 ```
 http://localhost:3000
@@ -116,7 +120,10 @@ http://localhost:3000
 
 ## 🧪 Testing API
 
-Gunakan Postman atau Thunder Client (VS Code)
+Gunakan:
+
+* Postman
+* Thunder Client (VS Code)
 
 ---
 
